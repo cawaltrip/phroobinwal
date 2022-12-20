@@ -1,0 +1,39 @@
+name: Deploy to AWS with CDK
+
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+env:
+  AWS_DEFAULT_REGION: us-east-1
+  SOURCE_PATH: "src/infra"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      # First clone the repo
+      - name: Clone repository
+        uses: actions/checkout@master
+
+      # Deploy the changes
+      - name: CDK Deploy
+        id: deploy
+        uses: cawaltrip/aws-cdk-github-actions@master
+        with:
+          cdk_subcommand: "deploy"
+          actions_comment: false
+          debug_log: true
+          working_dir: ${{ env.SOURCE_PATH }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
+          AWS_DEFAULT_ACCOUNT: ${{ secrets.AWS_ACCOUNT_ID }}
+
