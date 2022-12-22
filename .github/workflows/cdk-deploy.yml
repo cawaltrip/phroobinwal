@@ -31,12 +31,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
-      - name: Install Packages
-        id: install-packages
+      - name: Setup Packages
+        id: setup-packages
         uses: actions/setup-node@master
-        working-directory: ${{ env.SOURCE_PATH }}
         with:
           node-version: latest
+
+      - name: Install Packages
+        id: install-packages
+        working-directory: ${{ env.SOURCE_PATH }}
         run: npm install
 
       # Deploy the changes
