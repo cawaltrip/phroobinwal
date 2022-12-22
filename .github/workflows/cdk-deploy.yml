@@ -20,7 +20,24 @@ jobs:
 
       # First clone the repo
       - name: Clone repository
+        id: clone
         uses: actions/checkout@master
+
+      - name: Configure AWS Credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - name: Install Packages
+        id: install-packages
+        uses: actions/setup-node@master
+        working-directory: ${{ env.SOURCE_PATH }}
+        with:
+          node-version: latest
+        run: npm install
 
       # Deploy the changes
       - name: CDK Deploy
@@ -28,6 +45,7 @@ jobs:
         uses: cawaltrip/aws-cdk-github-actions@master
         with:
           cdk_subcommand: "deploy"
+          cdk_args: "--reguire-aproval never"
           actions_comment: false
           debug_log: true
           working_dir: ${{ env.SOURCE_PATH }}
@@ -36,4 +54,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
           AWS_DEFAULT_ACCOUNT: ${{ secrets.AWS_ACCOUNT_ID }}
-

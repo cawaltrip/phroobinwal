@@ -1,6 +1,6 @@
 {
   "name": "phroobinwall",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "bin": {
     "app": "bin/app.js"
   },
@@ -17,7 +17,9 @@
     "ts-jest": "^29.0.3",
     "aws-cdk": "2.55.1",
     "ts-node": "^10.9.1",
-    "typescript": "~4.9.4"
+    "typescript": "~4.9.4",
+    "aws-cdk-lib": "2.55.1",
+    "constructs": "^10.0.0"
   },
   "dependencies": {
     "aws-cdk-lib": "2.55.1",
