@@ -18,9 +18,14 @@
     ]
   },
   "context": {
-    "namespace": "static-site",
-    "domain-name": "example.com",
-    "hosted-zone-id": "",
-    "hosted-zone-name": "example.com"
+    "domain-name": "phroobinwal.design",
+    "website-path": "../website/public",
+    "aws_profile": "phroobinwal-publish",
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/core:target-partitions": [
+      "aws",
+      "aws-cn"
+    ],
+    "@aws-cdk/aws-iam:minimizePolicies": true
   }
 }
