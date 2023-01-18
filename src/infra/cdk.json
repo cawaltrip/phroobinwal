@@ -18,9 +18,9 @@
     ]
   },
   "context": {
-    "domain-name": "phroobinwal.design",
-    "website-path": "../website/public",
-    "aws_profile": "phroobinwal-publish",
+    "appName": "PhroobinwalDesign",
+    "domainName": "phroobinwal.design",
+    "websitePath": "../website/public",
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": [
       "aws",

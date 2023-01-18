@@ -22,7 +22,7 @@ export class InfraStack extends Stack {
     super(scope, id, props);
 
     // Domain name is defined in `cdk.json`.
-    const domainName = this.node.tryGetContext("domain-name");
+    const domainName = this.node.tryGetContext("domainName");
     if (!domainName) {
       throw new Error("The domain name must be set in cdk.json.");
     }
@@ -32,7 +32,7 @@ export class InfraStack extends Stack {
       domainName: domainName
     });
 
-    const siteDirectory = this.node.tryGetContext("website-path");
+    const siteDirectory = this.node.tryGetContext("websitePath");
     if (!siteDirectory) {
       throw new Error("This website path must be set i cdk.json.")
     }
